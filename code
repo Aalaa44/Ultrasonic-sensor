@@ -1,0 +1,193 @@
+int cm;
+int inches;
+
+int DP = 12;
+int A = 3;
+int B = 2;
+int F = 4;
+int G = 5;
+int C = 13;
+int D = 8;
+int E = 9;
+
+long readUltrasonicDistance(int triggerPin, int echoPin){
+  pinMode(triggerPin, OUTPUT);
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+  pinMode(echoPin, INPUT);
+  return pulseIn(echoPin, HIGH);
+}
+
+void setup()
+{
+  pinMode(DP, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(A, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  Serial.begin(9600);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+
+void loop()
+{
+  //speed of sound = 0343 cm/μS and divide it by 2 it will be 0.017
+  cm = 0.01723 * readUltrasonicDistance(7, 6);
+
+
+  Serial.print(cm);
+  Serial.println("cm");
+  delay(50);
+
+  
+  if (cm>=90 && cm<100) //90%
+  {    
+    digitalWrite(DP,LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  }  
+    if (cm>=80 && cm<90) //80%
+  {    
+    digitalWrite(DP, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  } 
+   if (cm>=70 && cm<80) //70%
+  {    
+    digitalWrite(DP, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  }  
+  if (cm>=60 && cm<70) //60%
+  {    
+    digitalWrite(DP, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  }  
+  if(cm>=50 && cm<60)//50%
+  {
+    digitalWrite(DP, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  }
+  if(cm>=40 && cm<50)//40%
+  {digitalWrite(DP, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);}
+    if(cm>=30 && cm<40) //30%
+    {digitalWrite(DP, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);}
+
+  if (cm >= 20 && cm < 30) //20%
+  {     
+    digitalWrite(DP, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH); 
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  }  
+  if (cm >= 10 && cm < 20)//10% 
+  {   
+    digitalWrite(DP, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(A, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(11, LOW);
+  } 
+  if(cm < 10)//<10%
+  {
+    digitalWrite(11, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(DP, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(A, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    
+  }
+  if(cm > 99) //>90%
+  {
+    digitalWrite(10, LOW);
+    digitalWrite(11, HIGH);
+    digitalWrite(DP, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(A, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    
+  }
+ 
+}
